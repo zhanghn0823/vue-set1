@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+	<script src="bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<input type="button" @click="a='aaa'" value="aaa组件" name="">
+		<input type="button" @click="a='bbb'" value="bbb组件" name="">
+		<component :is="a"></component>
+	</div>
+
+	
+
+	<script type="text/javascript" >
+		
+
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				a:'aaa'
+			},
+			components:{
+				"aaa":{
+					template:'<h2>woshi aaa zujian</h2>'
+				},
+				"bbb":{
+					template:"<h2>woshi bbb zujian</h2>"
+				}
+			}
+
+		});
+	</script>
+</body>
+</html>

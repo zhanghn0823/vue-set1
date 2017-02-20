@@ -1,0 +1,17 @@
+vue制作微博
+	交互
+	
+vue ->
+		vue-resource   ajax php
+		服务器环境（node）
+		
+---------------------------------------------------
+vue实例简单方法:
+	vm.$el	->  就是元素
+	vm.$data  ->  就是data
+	vm.$mount ->  手动挂在vue程序
+	
+	vm.$options	->   获取自定义属性
+	vm.$destroy	->   销毁对象
+
+	vm.$log();	->  查看现在数据的状态		

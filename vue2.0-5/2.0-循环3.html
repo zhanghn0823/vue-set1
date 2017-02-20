@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			new Vue ({
+				el:'#box',
+				data:{
+					list:{
+						a:'apple',
+						b:'banana',
+						c:'cell'
+
+					}
+				},
+				methods:{
+					add(){
+						this.list.push('background');
+					}
+				}
+
+			});
+		}
+
+	</script>
+</head>
+<body>
+	<div id="box">
+	<input type="button" name="" value="添加" >
+		<ul>
+			<li v-for="(val,key) in list">
+				{{val}}     {{key}}
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

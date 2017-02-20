@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>局部组件</title>
+	<script src="bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<my-aaa></my-aaa>
+	</div>
+
+	<!-- 模板 -->
+	<script type="text/javascript" id="aaa">
+		<h2 @click="change"> 标题->{{msg}}</h2>
+
+		<ul>
+			<li>111</li>
+			<li>222</li>
+			<li>333</li>
+			<li>111</li>
+		</ul>
+
+	</script>
+
+	<script type="text/javascript" >
+		
+
+		var vm = new Vue({
+			el:'#box',
+			components:{
+				
+				'my-aaa':{
+					data(){
+						return{
+							msg:'welcome vue'
+						}
+					},
+					methods:{
+						change(){
+							this.msg='changed'
+						}
+					},
+
+					template:'#aaa'
+				}
+			}
+
+		});
+	</script>
+</body>
+</html>

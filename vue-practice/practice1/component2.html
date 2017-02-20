@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../js/vue.js"></script>
+</head>
+<body>
+	<div id="example">
+		<my-component></my-component>
+
+	</div>
+
+	<script type="text/javascript">
+		var Child={
+			template:'<h2>A custom component!</h2>'
+		}
+	
+
+		new Vue({
+			el:'#example',
+			components:{
+				'my-component':Child
+			}
+
+		})
+
+	</script>
+</body>
+</html>

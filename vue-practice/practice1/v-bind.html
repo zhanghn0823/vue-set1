@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<style type="text/css">
+			.box {
+				border: 1px dashed #f0f;
+			}
+			
+			.textColor {
+				color: #f00;
+				background-color: #eef;
+			}
+			
+			.textSize {
+				font-size: 30px;
+				font-weight: bold;
+			}
+		</style>
+		</head>
+
+		<body>
+			<div id="app">
+				<ul class="box" v-bind:class="{'textColor':isColor, 'textSize':isSize}">
+					<li>学习Vue</li>
+					<li>学习Node</li>
+					<li>学习React</li>
+				</ul>
+			</div>
+		</body>
+
+		<script>
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					isColor: true,
+					isSize: true
+				}
+			})
+		</script>
+
+	</body>
+
+</html>

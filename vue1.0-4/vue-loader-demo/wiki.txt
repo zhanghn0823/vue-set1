@@ -1,0 +1,88 @@
+.vue  结尾的叫组件
+	路由使用版本0.7.13
+	配合vue-loader使用：
+	1.下载vue-router
+	2.import VueRouter from 'vue-router';
+	3.Vue.use(VueRouter);  
+	4.配置路由
+		var router=new VueRouter();
+		router.map({
+			路由规则
+		})
+	5.开启
+		router.start(App,"#app"); //开启路由App页面,加载到id为app的元素内
+	
+	注意：
+		之前：index.html -> <app></app>
+		
+		现在：index.html -> <div id="app"></div>
+		
+		App.vue          -> 需要一个<div id="app"></div>根元素
+	
+	
+	
+	home   news
+	
+---------------------------------------------------
+路由嵌套
+
+
+---------------------------------------------------
+上线 
+	npm run build
+				-> webpack -p
+
+---------------------------------------------------
+
+脚手架：
+		vue-cli  ---  vue脚手架
+				帮你提供好基本项目结构
+				
+				
+本身集成项目模板
+	simple        没啥用
+	webpack			可以使用（大型项目）
+					Eslint检查代码规范
+					单元测试
+	webpack-simple	个人推荐使用，没有代码检查    √
+					
+	
+	
+	browserify      ->自己了解
+	browserify-simple
+
+---------------------------------------------------
+
+基本流程：
+1. npm install vue-cli -g   安装命令环境
+		验证安装ok？
+			vue --version
+
+2.生成项目模板
+	vue init <模板名>
+3.进入到生成目录里面 
+    cd   <目录>
+	npm install
+4.npm run dev
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

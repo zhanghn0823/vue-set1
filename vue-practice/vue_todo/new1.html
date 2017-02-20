@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.view {
+				width: 400px;
+				height: 30px;
+				border: 1px solid #ccc
+			}
+			
+			li {
+				list-style: none;
+			}
+			
+			h1 {
+				font-size: 70px;
+				color: red;
+				opacity: 0.3;
+				position: relative;
+			}
+			
+			.destory {
+				float: right;
+			}
+			
+			header {
+				text-align: center;
+			}
+			
+			section {
+				text-align: center;
+			}
+			
+			.main {
+				text-align: center;
+			}
+			
+			.toggle {
+				float: left;
+			}
+			
+			.todo-list {
+				text-align: center;
+			}
+			
+			.view {
+				margin: 0 auto;
+			}
+			
+			.new-todo {
+				width: 400px;
+				height: 50px;
+			}
+			
+			.item {
+				position: absolute;
+				margin-left: 39.5%;
+				margin-top: -70px
+			}
+			
+			.destory {
+				height: 30px;
+			}
+			
+			.toggle {
+				height: 30px;
+			}
+			
+			span {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="todoapp">
+			<!-- 头部 -->
+			<header class="header">
+				<h1>todos</h1>
+				<input class="new-todo" placeholder="what needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
+			</header>
+			<!-- 主体 -->
+			<!-- v-show="todolist.length"表示当todolist.length值不为0时显示该部分元素 -->
+			<section class="main" v-show="todolist.length">
+
+				<!-- v-model绑定到allDone上，当所有事件被选中时，此checkbox被标记为选中，反之则不是选中状态 -->
+				<div class="item">
+					<input type="checkbox" class="toggle-all" v-model="allDone">
+					<label for="toggle-all">标记全部</label>
+				</div>
+				<!--  -->
+				<ul class="todo-list" id="todolist">
+					<!-- :class="{completed:todo.completed}"设置父组件的class为completed ，当todo.completed为true是，class会被设置为completed-->
+					<li v-for="todo in todolist" :class="{completed: todo.completed}" class="to">
+						<div class="view">
+							<!-- v-model="todo.completed"表示todo.completed与input的选择状态是一致的：当input选中时，todo.completed会被置为true，否则为false -->
+							<input class="toggle" type="checkbox" v-model="todo.completed"></input>
+							<label>{{todo.lable}}</label>
+							<!-- 删除todo -->
+							<button class="destory" @click="removeTodo(todo)">删除</button>
+						</div>
+						<!-- <input class="edit" value="Rule the web"> -->
+					</li>
+				</ul>
+
+			</section>
+
+			<!-- v-show="todolist.length"表示当todolist返回值不是0时，则该元素显示 -->
+			<footer class="footer" v-show="todolist.length" v-cloak>
+				<!-- v-show="todolist.length > remaining"当满足该条件时，此按钮显示出来，也就是当没有添加todo时，此按钮隐藏 -->
+				<button class="clear-completed" @click="removeCompleted" v-show="todolist.length > remaining">删除全部</button>
+				<!-- 当添加todo时向页面中插入remainingText -->
+				<span class="todo-count"><strong v-text="remainingText"></strong>件事</span>
+				<ul class="filters">
+					<li>
+						<a href="#/all" :class="{completed: todo.completed}">All</a>
+					</li>
+					<li>
+						<a href="#/active" :class="{completed: todo.completed}" id="active">Active</a>
+					</li>
+					<li>
+						<a href="#/completed" :class="{completed: todo.completed}">Completed</a>
+					</li>
+				</ul>
+			</footer>
+
+		</section>
+
+		<script type="text/javascript">
+			var filters = { //自定义了一个过滤器
+				all: function(todos) { //返回全部todo
+					return todos;
+				},
+				active: function(todos) { ///返回活动状态的todo
+					return todos.filter(function(todo) {
+						return !todo.completed; //返回已经被勾选的todo
+					});
+				},
+				completed: function(todos) { //返回未被勾选的todo
+					return todos.filter(function(todo) { //调用filter过滤器，向函数中传递todo，然后返回未被勾选的todo
+						return todo.completed;
+					});
+				}
+			};
+
+			new Vue({
+				el: ".todoapp",
+				data: {
+					todolist: [],
+					newTodo: '',
+				},
+				// computed properties
+				// 实例计算属性。get 和 set的 this 自动地绑定到实例。
+				computed: {
+					remaining: function() { //只读函数，该函数调用了filters中定义active过滤器，返回其length属性，即已勾选todo数组的长度。
+						return filters.active(this.todolist).length;
+					},
+					allDone: {
+						//是一个可读可写的选项，使用get定义读取，使用set定义写入，
+						get: function() { //get函数直接返回前面计算的属性remaining的长度是否为0，如果为0则说明没有剩余活动的todo，checkbox应该被选中;
+							return this.remaining === 0;
+						},
+						set: function(value) { //set函数遍历todolist，将每一个todo的completed属性设置为vaule，这个vaule就是checkbox传递过来的是否选中的布尔值
+							this.todolist.forEach(function(todo) {
+								todo.completed = value;
+							});
+						}
+					},
+					remainingText: function() {
+						if(this.remaining == 0 || this.remaining > 1) {
+							// return this.remaining+'items';
+							return '未标记' + this.remaining //remianing,是表示已被勾选的todo的数组的长度
+						} else {
+							return '已标记' + this.remaining;
+						}
+					},
+					remainDisplay: function() {
+						if((this.remaining / 2) == 0) {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				},
+				methods: {
+					addTodo: function() {
+						if(this.newTodo) {
+							var todo = this.newTodo.trim();
+							this.todolist.push({
+								lable: todo,
+								completed: false
+							}); //lable属性用来保存todo的内容，completed用来标记todo的完成状态
+							this.newTodo = '';
+						}
+					},
+					removeTodo: function(todo) {
+						this.todolist.$remove(todo);
+					},
+					removeCompleted: function() {
+						this.todolist = filters.active(this.todolist);
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

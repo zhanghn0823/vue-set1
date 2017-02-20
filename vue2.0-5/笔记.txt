@@ -1,0 +1,131 @@
+vue2.0:
+		
+	有哪些变化？
+	
+	1.在每个组件模板 不支持片段代码
+			组件中模板：
+				之前：
+					<template id="aaa">
+						<h3>我是组件</h3>
+						<strong>我是加粗标签</strong>
+					</template>
+				
+				现在必须有根元素，包裹住所有代码
+				<template id="aaa">
+					<div>
+						<h3>我是组件</h3>
+						<strong>我是加粗标签</strong>
+					</div>
+				</template>
+	2.关于组件的定义
+		Vue.extend  这种方式，在2.0 里面有，但是有一定改动，尽量不用  --当做废弃
+		
+		Vue.component(组件名称，{   2.0能用
+			data(){}
+			methods(){}
+			template(){}
+		});
+		
+		2.0 推出一个组件，简介定义方式：
+			var Home={
+				template:""          => Vue.extend
+			};
+	
+	3.生命周期
+			之前：
+				init
+				created
+				beforeCompile
+				compiled
+				ready     ->  mounted
+				beforeDestroy
+				destroyed
+			现在：
+				beforeCreate 	组件实例刚刚被创建，属性都没有
+				created			实例已经创建完成 有属性
+				beforeMount 	模板编译之前
+				mounted			编译之后 相当于以前的ready		*
+				beforeUpdate    组件更新之前
+				updated  		组件更新完毕		*
+				beforeDestroy   组件销毁前
+				destroyed			组件销毁后
+				
+				
+	4. 循环			
+		2.0里面默认就可以添加重复的数据
+		
+		arr.forEach(function(item,index){
+			
+		});
+		
+		去掉了一些隐式变量
+			$index  $key
+
+		之前：
+			v-for="(index,val) in array"
+		
+		现在：
+			v-for="(val,index) in array"
+			
+			
+	5.track-by='id'
+		变成：
+			<li v-for="(val,index) in list" :key="index">
+			
+			
+	6.自定义键盘指令		
+		之前：
+			Vue.directive('on').keyCodes.ctrl=17;
+			
+		现在：
+			Vue.config.keyCodes.ctrl=17;
+			
+	7.过滤器
+		之前：	
+			系统自带很多过滤
+			{{msg | json}}
+		
+		
+		现在：
+			到了2.0 ，内置过滤器，全部删除了
+			 lodash  工具库   _.debounce(fn,200)
+			
+		自定义过滤器：
+			传参发生变化
+			之前 	{{msg | toDou '12' '5'}}
+			现在 	{{msg | toDou('12','5')}}
+				
+--------------------------------------------------------------
+组件通信
+		
+		vm.$emit()
+		vm.on();
+		
+		父组件和子组件
+			
+			
+		子组件拿到父组件的数据
+			props['msg]
+			
+			
+		之前子组件可以更改父组件的信息，可以是同步的  sync
+
+		现在不允许直接给父组件的数据做直接的赋值操作
+			
+		就想更改的方式
+			a. 父组件每次传一个对象给子组件， 对象之间是引用的，对立面的属性操作
+			b. 只是不报错，mounted 中转 ，操作子级自己的数据
+	
+	
+---------------------------------------------------------------	
+可以单一事件给管理组件的通信：
+	
+	var Event=new Vue();
+	Event.$emit(事件名称,数据)
+	Event.$on(事件名称,function(data){
+		//data
+		
+	}.bind(this));
+---------------------------------------------------------------
+	
+	

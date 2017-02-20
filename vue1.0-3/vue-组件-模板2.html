@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>局部组件</title>
+	<script src="bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<my-aaa></my-aaa>
+	</div>
+
+	<template id="aaa">
+		<h1>标题1</h1>
+		<ul>
+			<li v-for="vl in arr">
+				{{vl}}
+			</li>
+		</ul>
+
+	</template>
+
+	<script type="text/javascript" >
+		
+
+		var vm = new Vue({
+			el:'#box',
+			components:{
+				
+				'my-aaa':{
+					data(){
+						return{
+							msg:'welcome vue',
+							arr:['apple','pear','orange']
+						}
+					},
+					methods:{
+						change(){
+							this.msg='changed'
+						}
+					},
+
+					template:'#aaa'
+				}
+			}
+
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态prop</title>
+	<script src="../js/vue.js"></script>
+</head>
+<body>
+	<div id="example">
+		<input v-model='pMsg'>
+		<br>
+		<child :my-message="pMsg"></child>
+
+	</div>
+
+	<script type="text/javascript">
+
+	Vue.component('child',{
+		props:['myMessage'],
+		template:'<h2>{{myMessage}}</h2>'
+	})
+
+		new Vue({
+			el:'#example',
+			data(){
+				return{
+					pMsg:'aliez!'
+				}
+			}
+
+		})
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="example">
+        <p>{{total}}</p>
+        <button-counter v-on:inc='incrementTotal'></button-counter>
+        <button-counter v-on:inc='incrementTotal'></button-counter>
+    </div>
+    <script type="text/javascript">
+    Vue.component('button-counter', {
+
+        template: '<button v-on:click="inc">{{counter}}</button>',
+        data() {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            inc() {
+                this.counter += 1;
+                this.$emit('inc')
+            }
+        }
+    })
+
+    new Vue({
+        el: '#example',
+        data() {
+            return {
+                total: 0
+            }
+        },
+        methods: {
+            incrementTotal() {
+                this.total += 1
+            }
+        }
+
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+vue-组件
+定义一个组件：
+1.全局组件
+	var Aaa = Vue.extend({
+			template:'<h3>我是标题3</h3>'
+		});
+	Vue.component('aaa',Aaa);
+	
+	
+	组件里面的data必须是一个函数，函数必须一个对象。
+	
+2.局部组件
+	放到某个组件内部
+var vm = new Vue({
+			el:'#box',
+			data:{
+
+			},
+			components:{//局部组件
+				aaa:Aaa
+			}
+
+		});
+		
+-----------------------------------------
+配合模板：
+		
+	a.)<script type="text/javascript" id="aaa">
+		<h2 @click="change"> 标题->{{msg}}</h2>
+
+		<ul>
+			<li>111</li>
+			<li>222</li>
+			<li>333</li>
+			<li>111</li>
+		</ul>
+
+	</script>
+		
+		
+	b.)	<template id="aaa">
+		<h1>标题1</h1>
+		<ul>
+			<li v-for="vl in arr">
+				{{vl}}
+			</li>
+		</ul>
+
+		</template>
+	
+-----------------------------------------
+动态组件：
+
+-----------------------------------------
+组件数据传递
+	1.子组件获取父组件信息data
+		在调用子组件：
+			<bbb :mmm="数据"> </bbb>
+			
+		子组件之内：
+			props：['mmm','myMsg'],
+			
+	2.父级获取子级数据
+		子组件把自己的数据，发送到父级
+		
+		vm.$emit（事件名，数据）
+		
+		v-on:  @
+			
+-----------------------------------------
+		vm.$dispatch(事件名，数据）  子级向父级发送数据	
+		vm.$broadcast(事件名，数据） 父级向子级广播数据
+			配合event：{}
+			
+	在vue2.0 已经淘汰。
+-----------------------------------------
+slot：
+		位置、槽口
+		作用：占个位置
+		
+-----------------------------------------
+vue -> SPA应用
+		
+	vue-resource   交互
+	vue-router  路由
+	
+	根据不同URL地址，出现不同效果
+
+	
+主页   home
+新闻页  news
+
+
+	
+	view:
+	
+	html：
+		<a v-link="{path:'/home'}" title="">主页</a>  跳转链接
+		
+		展示内容：
+				<router-view></router-view>
+		
+	js：
+		
+		//1.准备一个根组件
+		var App=Vue.extend();
+
+		//2.Home News组件都准备
+		var Home=Vue.extend({
+			template:'<h3>我是主页</h3>'
+		});
+
+		var News=Vue.extend({
+			template:'<h3>我是新闻页</h3>'
+		})
+		//3.准备路由
+		var router=new VueRouter();
+
+		//4.关联
+		router.map({
+			"home":{
+				component:Home
+			},
+			'news':{
+				component:News
+			}
+		});
+		//5.启动整个路由
+		router.start(App,'#box');
+		
+跳转：
+		router.redirect({
+			'/aaa':'/home'
+		})
+
+
+		
+-----------------------------------------
+路由嵌套（多层路由）		
+			
+-----------------------------------------
+vue-loader		
+
+
+-----------------------------------------
+简单的目录结构:
+	|-index.html
+	|-main.js	入口文件
+	|-App.vue	vue文件，官方推荐命名法
+	|-package.json	工程文件(项目依赖、名称、配置)
+		npm init --yes 生成
+	|-webpack.config.js	webpack配置文件
+
+ES6: 模块化开发
+	导出模块：
+		export default {}
+	引入模块:
+		import 模块名 from 地址	
+			
+			

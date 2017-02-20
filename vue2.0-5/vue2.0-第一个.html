@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		var Aaa=Vue.extend('aaa',{
+			template:'<h3>这是组件</h3>'
+		});
+
+		Vue.component('my-aaa',Aaa);
+
+		window.onload=function(){
+			new Vue({
+				el:'#box',
+				data:{
+					msg:'welcome vue2.0'
+				},
+
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		{{msg}}
+
+	</div>
+	
+
+</body>
+</html>

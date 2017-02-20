@@ -1,0 +1,45 @@
+workspace-vue
+
+使用别人组件
+	
+	Vue.use(VueRouter)
+	Vue.use(VueMintUI)
+	
+	
+	axios
+	
+	Vue.use(Axios)
+--------------------------------------------------
+自定义全局组件
+		使用：
+		
+			<Loading></Loading>
+			
+---------------------------------------------------	
+	
+	定义组件方法
+		
+		|-loading/
+			|-index.js     //导出组件，并且install
+			|-Loading.vue   //Loading 组件
+
+	主要文件index.js代码：
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

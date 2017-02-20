@@ -1,0 +1,114 @@
+﻿UI组件
+	
+	别人提供好的
+	目的：为了提高开发效率
+			功能
+	原则：拿过来直接用
+	
+	bootstrap：
+				twitter
+				简洁、大方
+				官网文档
+-------------------------------------------------------
+	bower  前端包管理器
+			自动解决依赖 
+			
+	 npm  node包管理器
+--------------------------------------------------------
+饿了么团队开源一个基于vue组件库
+	elementUI：  pc
+		如何使用：
+		
+	1.安装
+		npm i element-ui -D
+		
+		//i  ->  install
+		//D  -> --save-dev
+		//S  -> --save
+	
+	2.引入  main.js    入口文件
+		
+		import 'element-ui/lib/theme-default/index.css'
+		import App from './App.vue'
+		
+		全部引入
+
+	3. 使用组件
+		Vue.use(ElementUI)
+		
+		css-loader  引入css						
+		字体图标     file-loader
+		
+			cnpm install style-loader -D
+			
+			配置package.json
+			  {
+				test: /\.css$/,
+				loader: 'style-loader!css-loader'
+			  },
+			  {
+				test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+				loader: 'file-loader'
+			  },
+				
+				
+		less：
+				less
+				less-loader
+				
+				
+按需加载相应插件：
+	借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+	就需要按钮
+1.  借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+	cnpm install babel-plugin-component -D
+2.  .babelrc文件里面新增一个配置
+		 "plugins": [["component", [
+			{
+			  "libraryName": "element-ui",
+			  "styleLibraryName": "theme-default"
+			}
+		  ]]]
+		  
+3.想用哪个 就用哪个
+	引入：import {Button,Radio} from 'element-ui'
+	使用：  Vue.use(Button);
+			Vue.use(Radio);
+--------------------------------------------------------
+发送请求：
+
+		vue-resource        交互  >不用
+
+		axios
+		
+		
+			
+		
+		  
+-----------------------------------------------------------
+
+	MintUI：    移动ui库
+	
+				http://mint-ui.github.io/#!/zh-cn
+				
+		1. 下载
+			# Vue 1.x
+			npm install mint-ui@1 -S
+			# Vue 2.0
+			npm install mint-ui -S
+		2.引入
+			
+			// 引入全部组件
+			import Vue from 'vue';
+			import Mint from 'mint-ui';
+			import 'mint-ui/lib/style.css';      要引入css
+			Vue.use(Mint);
+			// 按需引入部分组件
+			import { Cell, Checklist } from 'minu-ui';
+			Vue.component(Cell.name, Cell);
+			Vue.component(Checklist.name, Checklist);
+	
+	
+	
+	
+	

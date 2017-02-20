@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body{
+				font-size: 3rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<span v-text="a"></span>
+			<br />
+
+		</div>
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+
+				
+				data:{
+					a:1,
+					b:1
+				},
+				
+			}).$mount('#box');
+			
+			console.log(vm.$log());
+			
+			
+
+
+
+
+		</script>
+	</body>
+</html>

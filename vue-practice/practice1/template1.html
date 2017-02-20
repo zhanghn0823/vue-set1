@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件</title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="vueInstance">
+        <mine></mine>     
+     </div>
+
+    <template id="myVue">
+        <p>i am vue</p>
+        <p>welcome!</p>
+    </template>
+
+    <script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+     <script>
+        Vue.component('mine',{   //这里就是注册的内容
+            template : '#myVue'
+        });
+       // 创建一个新的Vue实例，并设置挂载点
+       var V = new Vue({
+             el : '#vueInstance'
+       });
+     </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+Prop 验证
+
+组件可以为 props 指定验证要求。如果未指定验证要求，Vue 会发出警告。
+当组件给其他人使用时这很有用。
+prop 是一个对象而不是字符串数组时，它包含验证要求：
+---------------------------------------------------------------------------------
+Vue.component('example', {
+  props: {
+    // 基础类型检测 （`null` 意思是任何类型都可以）
+    propA: Number,
+    // 多种类型
+    propB: [String, Number],
+    // 必传且是字符串
+    propC: {
+      type: String,
+      required: true
+    },
+    // 数字，有默认值
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // 数组／对象的默认值应当由一个工厂函数返回
+    propE: {
+      type: Object,
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // 自定义验证函数
+    propF: {
+      validator: function (value) {
+        return value > 10
+      }
+    }
+  }
+})
+
+-------------------------------------------------------
+// 简单语法
+Vue.component('props-demo-simple', {
+  props: ['size', 'myMessage']
+})
+// 对象语法，提供校验
+Vue.component('props-demo-advanced', {
+  props: {
+    // 只检测类型
+    height: Number,
+    // 检测类型 + 其他验证
+    age: {
+      type: Number,
+      default: 0,
+      required: true,
+      validator: function (value) {
+        return value >= 0
+      }
+    }
+  }
+})
+
+--------------------------------------------------------------
+Vue 不允许在已经创建的实例上动态添加新的根级响应式属性(root-level reactive property)。然而它可以使用 Vue.set(object, key, value) 方法将响应属性添加到嵌套的对象上：
+Vue.set(vm.someObject, 'b', 2)
+可以使用 vm.$set 实例方法，这也是全局 Vue.set 方法的别名：
+this.$set(this.someObject,'b',2)

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<span>{{msg}}</span>
+			<!--{{{}}}  vue2.0不用-->
+			<span v-text='msg'></span>
+			<span v-html='msg'></span>
+
+		</div>
+		
+		<script type="text/javascript">
+			new Vue({
+				el:'#box',
+				data:{
+					msg:'<strong>welcome</strong>'
+				}
+			});
+		</script>
+	</body>
+</html>

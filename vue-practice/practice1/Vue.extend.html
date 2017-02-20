@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../js/vue.js"></script>
+</head>
+<body>
+	<div id="mount-point">
+		
+	</div>
+
+
+	<script type="text/javascript">
+		var Pro=Vue.extend({
+			template:'<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+			data(){
+				return{
+					firstName:'zzzz',
+					lastName:'xxxxx',
+					alias:'cccccc'
+				}
+			}
+		})
+
+		new Pro().$mount('#mount-point');
+	</script>
+</body>
+</html>

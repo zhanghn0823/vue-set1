@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <script src="vue.js" type="text/javascript"></script>
+    <script src="vue-router.js" type="text/javascript"></script>
+    <style type="text/css" media="screen">
+    p {
+        width: 100px;
+        height: 100px;
+        background: red;
+        /* opacity: 0; */
+        margin: 10px auto;
+    }
+    .router-link-active{
+    	font-size: 20px;
+    	color: #f60;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+    <input type="button"  value="添加一个路由" @click="push" >
+     <input type="button"  value="替换一个路由" @click="replace" >
+        <div>
+        	<router-link to="/home">主页</router-link>
+        	<router-link to="/user">用户</router-link>
+
+        </div>
+        <div>
+        	<router-view>
+        		
+        	</router-view>
+        </div>
+    </div>
+	
+	<script type="text/javascript">
+		//组件
+		var Home={
+			template:"<h3>我是主页</h3>"
+		};
+		var User={
+			template:`
+				<div>
+					<h3>我是用户</h3>
+					<ul>
+						<li><router-link to='/user/strive/age/10'>Strive </router-link></li>
+						<li><router-link to='/user/bue/age/80'>Blue </router-link></li>
+						<li><router-link to='/user/eric/age/70'>Eric </router-link></li>
+					</ul>
+					<div>
+						<router-view></router-view>
+					</div>
+				</div>
+
+			`
+			
+		};
+		var UserDetail={
+			template:'<div> 我是{{$route.params}}</div>'
+		}
+		//配置路由
+		const routes=[
+			{path:'/home', component:Home},
+            {
+            	path:'/user', 
+            	component:User,
+            	children:[
+            	{path:'/user/:username/age/:age',component:UserDetail}
+            	]
+            },
+            {path:'*',redirect:'/home'},  //404
+		];
+		//生成路由的一个实例
+		const router=new VueRouter({
+			routes
+		})
+		//	最后挂到vue上
+		new Vue({
+			router,
+			methods:{
+				push(){
+					// alert(1);
+					router.push({path:"/home"})
+				},
+				replace(){
+					router.replace({path:'/user'})
+				}
+			},
+			// el:"#box"
+		}).$mount('#box');
+	</script>
+</body>
+
+</html>

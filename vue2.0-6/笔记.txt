@@ -1,0 +1,138 @@
+﻿vue 动画
+vue 路由
+transition 之前属性
+<p transition="fade"></p>
+.fade-transition{}
+.fade-enter{}
+.fade-leave{}
+------------------------------------------------------
+vue2.0 transition 组件
+
+<transition name='fade'>
+	运动东西（元素，原生，路由...）
+</transition>
+class定义：
+.fade-enter{}   //初始的一个状态
+.fade-enter-active{} //变成什么样->元素出来
+
+
+.fade-leave{}		//
+.fade-leave-active{}   //变成什么样	 ->元素消失
+
+配合animate.css使用
+	<transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">
+		<p v-show="show"></p>
+	</transition>
+	
+多个元素想要运动
+ <transition-group enter-active-class="" leave-active-class="">
+	<p :key=""></p>
+	<p :key=""></p>
+ </transition-group>
+-----------------------------------------------------------------
+vue2.0路由
+
+	基本使用：
+	1.布局
+		<router-link to="/home">主页</router-link>
+        <router-link to="/news">新闻</router-link>
+
+	2.路由具体配置
+		//组件
+		var Home={
+			template:"<h3>我是主页</h3>"
+		};
+		var News={
+			template:"<h3>我是新闻页</h3>"
+		};
+		//配置路由
+		const routes={
+			{path:'/home',component:Home},
+			{path:'/news',component:News},
+		};
+		//生成路由的一个实例
+		const router=new VueRouter({
+			routes;
+		})
+		//	最后挂到vue上
+		new Vue({
+			router,
+			el:"#box"
+		})
+	3.重定向
+		{path:'*',redirect:'/home'},
+----------------------------------------------------------
+路由嵌套
+		const routes=[
+			{path:'/home', component:Home},
+            {
+            	path:'/user', 
+            	component:User,
+            	children:[
+            	{path:'username',component:UserDetail}
+            	]
+            },
+            {path:'*',redirect:'/home'},  //404
+		];
+
+----------------------------------------------------------
+/user/zhangsan/age/10
+
+
+			{
+            	path:'/user', 
+            	component:User,
+            	children:[
+            	{path:'/user/:username/age/:age',component:UserDetail}
+            	]
+            },
+--------------------------------------------------------
+路由实例方法：
+	router.push({path:"home"}); //直接添加一个路由，表现切换路由，本质往历史记录里添加了
+
+	router.replace({path:""}); //替换路由，不会往历史记录里面添加
+--------------------------------------------------------
+vue-cli  
+-----------------------------------------------------------
+vue init webpack-simple vue-demo
+
+npm install
+-----------------------------------------------------------
+脚手架 ：vue-loader
+	1.0 -> 
+		new Vue({
+		  el: '#app',
+		  components:App
+		})
+	2.0->
+		new Vue({
+		  el: '#app',
+		  render: h => h(App)
+		})
+-----------------------------------------------------------
+vue2.0 
+  vue-loader 和vue-router 配合
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

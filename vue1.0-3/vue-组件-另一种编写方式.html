@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全局组件</title>
+	<script src="bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<my-aaa></my-aaa>
+	</div>
+
+	<script type="text/javascript">
+		Vue.compponent('my-aaa',{
+			template:'<strong>好</strong>'
+		});
+
+		var vm = new Vue({
+			el:'#box'
+			
+			
+
+		});
+	</script>
+</body>
+</html>

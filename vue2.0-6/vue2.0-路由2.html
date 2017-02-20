@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <script src="vue.js" type="text/javascript"></script>
+    <script src="vue-router.js" type="text/javascript"></script>
+    <style type="text/css" media="screen">
+    p {
+        width: 100px;
+        height: 100px;
+        background: red;
+        /* opacity: 0; */
+        margin: 10px auto;
+    }
+    .router-link-active{
+    	font-size: 20px;
+    	color: #f60;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div>
+        	<router-link to="/home">主页</router-link>
+        	<router-link to="/news">新闻</router-link>
+
+        </div>
+        <div>
+        	<router-view>
+        		
+        	</router-view>
+        </div>
+    </div>
+	
+	<script type="text/javascript">
+		//组件
+		var Home={
+			template:"<h3>我是主页</h3>"
+		};
+		var News={
+			template:"<h3>我是新闻页</h3>"
+		};
+		//配置路由
+		const routes=[
+			{path:'/home', component:Home},
+            {path:'/news', component:News},
+            {path:'*',redirect:'/home'},
+		];
+		//生成路由的一个实例
+		const router=new VueRouter({
+			routes
+		})
+		//	最后挂到vue上
+		new Vue({
+			router,
+			el:"#box"
+		})
+	</script>
+</body>
+
+</html>
